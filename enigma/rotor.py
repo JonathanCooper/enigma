@@ -1,8 +1,12 @@
 class Rotor(object):
     
-    def __init__(self, output_alphabet, notch):
+    def __init__(self, rotor_config):
+        output_alphabet, notch = rotor_config.split('.')
         self.offset = 0
-        self.notch = self.letter_to_idx(notch)
+        if notch == '?':
+            self.notch = None
+        else:
+            self.notch = self.letter_to_idx(notch)
         self.wiring = []
         self.output_alphabet = output_alphabet
         for i, c in enumerate(output_alphabet):
