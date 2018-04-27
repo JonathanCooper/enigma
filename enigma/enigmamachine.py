@@ -1,4 +1,5 @@
 from .rotor import Rotor
+import json
 
 class EnigmaMachine(object):
 
@@ -51,4 +52,4 @@ class EnigmaMachine(object):
         return plaintext
     
     def __repr__(self):
-        return str(self.rotors)
+        return '<EnigmaMachine {0}'.format(self.rotors)

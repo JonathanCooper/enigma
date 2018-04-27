@@ -49,4 +49,4 @@ class Rotor(object):
         self.offset %= 26
 
     def __repr__(self):
-        return self.output_alphabet
+        return '<Rotor {0}'.format(self.output_alphabet)
