@@ -1,11 +1,16 @@
 class Rotor(object):
     
-    def __init__(self, output_alphabet):
+    def __init__(self, output_alphabet, notch):
+        self.offset = 0
+        self.notch = self.letter_to_idx(notch)
         self.wiring = []
         self.output_alphabet = output_alphabet
         for i, c in enumerate(output_alphabet):
             self.wiring.append(self.letter_to_idx(c) - i)
-        
+    
+    def in_notch_position(self):
+        return self.offset == self.notch
+
     def output_letter_index(self, c):
         return self.output_alphabet.index(c)
 
@@ -24,6 +29,9 @@ class Rotor(object):
             return self.output_alphabet[in_idx]
     
     def rotate(self, offset=1):
+        """
+        rotate the rotor and return True if this activates notch, else False
+        """
         self.wiring = self.wiring[offset:] + self.wiring[:offset]
         self.output_alphabet = ''
         for i, wire in enumerate(self.wiring):
@@ -33,6 +41,8 @@ class Rotor(object):
             if out_idx < 0:
                 out_idx += 26
             self.output_alphabet += self.idx_to_letter(out_idx)
+        self.offset += offset
+        self.offset %= 26
 
     def __repr__(self):
         return self.output_alphabet

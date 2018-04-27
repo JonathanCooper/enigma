@@ -11,10 +11,10 @@ class EnigmaMachine(object):
         if len(key) != 3:
             raise Exception('Key length must be 3')
         self.rotors = {
-            1: Rotor(self.rotor_one_alphabet),
-            2: Rotor(self.rotor_two_alphabet),
-            3: Rotor(self.rotor_three_alphabet),
-            'R': Rotor(self.reflector_alphabet),
+            1: Rotor(self.rotor_one_alphabet, 'Q'),
+            2: Rotor(self.rotor_two_alphabet, 'E'),
+            3: Rotor(self.rotor_three_alphabet, 'V'),
+            'R': Rotor(self.reflector_alphabet, 'A'),
         }
         
         for i in range(0, 3):
@@ -26,13 +26,23 @@ class EnigmaMachine(object):
         '''convert letter to its 0-indexed position in the alphabet'''
         return ord(c) - 65
 
+    def step(self):
+        if self.rotors[2].in_notch_position():
+            rotate_rotors = [1, 2, 3]
+        elif self.rotors[3].in_notch_position():
+            rotate_rotors = [2, 3]
+        else:
+            rotate_rotors = [3]
+        for i in rotate_rotors:
+            self.rotors[i].rotate()
+
     def decipher(self, ciphertext):
         plaintext = ''
         for character in ciphertext:
-            self.rotors[3].rotate(1)
+            self.step()
             for rotor_idx in [3 ,2, 1, 'R']:
                 character = self.rotors[rotor_idx].transform_char(character)
-                for rev_rotor_idx in [1, 2, 3]:
+            for rev_rotor_idx in [1, 2, 3]:
                 character = self.rotors[rev_rotor_idx].transform_char(
                     character,
                     True
