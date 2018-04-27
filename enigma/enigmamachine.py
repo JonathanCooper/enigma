@@ -45,7 +45,7 @@ class EnigmaMachine(object):
             for rev_rotor_idx in [1, 2, 3]:
                 character = self.rotors[rev_rotor_idx].transform_char(
                     character,
-                    True
+                    inverse=True
                 )
             plaintext += character
         return plaintext
