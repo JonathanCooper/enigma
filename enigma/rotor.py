@@ -31,11 +31,8 @@ class Rotor(object):
         else:
             in_idx = self.letter_to_idx(c)
             return self.output_alphabet[in_idx]
-    
+
     def rotate(self, offset=1):
-        """
-        rotate the rotor and return True if this activates notch, else False
-        """
         self.wiring = self.wiring[offset:] + self.wiring[:offset]
         self.output_alphabet = ''
         for i, wire in enumerate(self.wiring):
