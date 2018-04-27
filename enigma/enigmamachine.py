@@ -2,19 +2,19 @@ from .rotor import Rotor
 
 class EnigmaMachine(object):
 
-    rotor_one_alphabet = 'EKMFLGDQVZNTOWYHXUSPAIBRCJ.Q'
-    rotor_two_alphabet = 'AJDKSIRUXBLHWTMCQGZNPYFVOE.E'
-    rotor_three_alphabet = 'BDFHJLCPRTXVZNYEIWGAKMUSQO.V'
-    reflector_alphabet = 'YRUHQSLDPXNGOKMIEBFZCWVJAT.?'
+    rotor_one_config = 'EKMFLGDQVZNTOWYHXUSPAIBRCJ.Q'
+    rotor_two_config = 'AJDKSIRUXBLHWTMCQGZNPYFVOE.E'
+    rotor_three_config = 'BDFHJLCPRTXVZNYEIWGAKMUSQO.V'
+    reflector_config = 'YRUHQSLDPXNGOKMIEBFZCWVJAT.?'
 
     def __init__(self, key):
         if len(key) != 3:
             raise Exception('Key length must be 3')
         self.rotors = {
-            1: Rotor(self.rotor_one_alphabet),
-            2: Rotor(self.rotor_two_alphabet),
-            3: Rotor(self.rotor_three_alphabet),
-            'R': Rotor(self.reflector_alphabet),
+            1: Rotor(self.rotor_one_config),
+            2: Rotor(self.rotor_two_config),
+            3: Rotor(self.rotor_three_config),
+            'R': Rotor(self.reflector_config),
         }
         
         for i in range(0, 3):
