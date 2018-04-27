@@ -1,5 +1,4 @@
 from .rotor import Rotor
-import json
 
 class EnigmaMachine(object):
 
